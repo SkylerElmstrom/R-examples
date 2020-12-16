@@ -13,6 +13,9 @@ output:
 knitr::opts_chunk$set(message=F, warning=F)
 library(knitr)
 ```
+# Add your name
+Skyler Elmstrom
+
 
 # The Problem
 Eric shared a benthic organisms data set from the [SF Estuary EMP](https://emp.baydeltalive.com/projects/11280) that was inconvenient for R processing for several reasons:
