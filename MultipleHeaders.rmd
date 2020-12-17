@@ -14,6 +14,10 @@ knitr::opts_chunk$set(message=F, warning=F)
 library(knitr)
 ```
 
+# GitHub Collaboration Note
+Testing Git commit push from RStudio. Add your name here:
+Skyler Elmstrom
+
 # The Problem
 Eric shared a benthic organisms data set from the [SF Estuary EMP](https://emp.baydeltalive.com/projects/11280) that was inconvenient for R processing for several reasons:
 
