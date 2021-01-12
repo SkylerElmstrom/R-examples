@@ -35,7 +35,7 @@ library(tidyverse)
 
 com.dates <- read.csv("https://raw.githubusercontent.com/WWU-IETC-R-Collab/MI-Analysis/main/data/ceden_benthic_WQ.csv")
 
-knitr::kable(head(com.dates[,1:5], 5)) # first 5 rows and columns of Eric's data to show it works
+knitr::kable(com.dates[1:5,1:5]) # first 5 rows and columns of Eric's data to show it works
 ```
 
 
