@@ -74,7 +74,7 @@ And here is the image we grabbed:
 
 This method is most useful if you do not plan on making changes to the original data or files (which we should NOT be doing). Loading data this way will create a temporary, local copy in your R session that is not saved to your own repository.
 
-There are some clever R coders who have figured out how to automate the conversion of [GitHub addresses]("https://stackoverflow.com/questions/11237715/how-to-display-images-in-markdown-on-github-generated-from-knitr-without-using-e").
+There are some clever R coders who have figured out how to automate the conversion of [GitHub addresses](https://stackoverflow.com/questions/11237715/how-to-display-images-in-markdown-on-github-generated-from-knitr-without-using-e).
 <br>
 
 -----
