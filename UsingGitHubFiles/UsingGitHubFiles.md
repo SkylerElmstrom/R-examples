@@ -47,6 +47,7 @@ knitr::kable(head(com.dates[,1:5], 5)) # first 5 rows and columns of Eric's data
 |  3|543R01103   |2015-04-21 |Confluence       |West Antioch Creek                  |
 |  4|544CCC001   |2011-06-06 |Confluence       |San Joaquin in Antioch Ship Channel |
 |  5|544CCC001   |2011-07-06 |Confluence       |San Joaquin in Antioch Ship Channel |
+
 We can now run our modifications to this data for our own purposes without editing the original.
 <br><br>
 

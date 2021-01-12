@@ -38,6 +38,7 @@ com.dates <- read.csv("https://raw.githubusercontent.com/WWU-IETC-R-Collab/MI-An
 
 knitr::kable(head(com.dates[,1:5], 5)) # first 5 rows and columns of Eric's data to show it works
 ```
+
 We can now run our modifications to this data for our own purposes without editing the original.
 <br><br>
 
