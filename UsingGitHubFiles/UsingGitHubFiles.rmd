@@ -7,14 +7,18 @@ output:
     code_folding: show
     code_download: true
     keep_md: true
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T, message=F, warning=F)
 ```
 
-## **Loading Data Files From Other Repositories**
-<br>
+## Loading Data From GitHub
+
+-----
+
 Files within a GitHub repository can be accessed directly! This includes tabular data, images, other R files, etc. Here is how:
 
 1. Get the `raw` web address of the file you need access to via GitHub
@@ -25,9 +29,7 @@ Files within a GitHub repository can be accessed directly! This includes tabular
 For example, say we wanted to use a portion of Eric's Benthic WQ data and analysis:
 <br><br>
 
------
-
-### Loading Eric's Data
+### Loading Eric's MI Data
 
 ```{r}
 library(tidyverse)
@@ -42,11 +44,7 @@ knitr::kable(com.dates[1:5,1:5]) # first 5 rows and columns of Eric's data to sh
 We can now run our modifications to this data for our own purposes without editing the original.
 <br><br>
 
------
-
-### Loading an Image from a Different Repository
-
-<br>
+### Loading an Image
 
 Then, say we wanted to include a chart created from another repository. We'd do this a little differently.
 
@@ -66,13 +64,10 @@ And here is the image we grabbed:
 This method is most useful if you do not plan on making changes to the original data or files (which we should NOT be doing). Loading data this way will create a temporary, local copy in your R session that is not saved to your own repository.
 
 There are some clever R coders who have figured out how to automate the conversion of [GitHub addresses](https://stackoverflow.com/questions/11237715/how-to-display-images-in-markdown-on-github-generated-from-knitr-without-using-e).
-<br>
+<br><br>
 
------
+**Pitfalls of Note**
 
-### Pitfalls of Note
-
-<br>
 There are a few key things to keep in mind when accessing files this way:
 
 1. If the name of the original file changes, the link in your own document to that file will break and no longer work
@@ -81,4 +76,35 @@ There are a few key things to keep in mind when accessing files this way:
 
 Make sure that if you use these methods that the underlying data is permanent. Otherwise, we may need to update the links when a file is deleted or renamed.
 <br><br>
+
+## Shapefiles on GitHub
+
+-----
+
+Utilizing shapefiles from GitHub directly is a bit more... indirect than accessing other .csv or other data files. Shapefiles are comprised of several auxiliary files that contain geometry, attribute data, coordinate system information, metadata, etc. In order for our shapefiles on GitHub to work properly in R, we'll need to provide them in a zipped format.
+
+A zipped shapefile is much easier to access directly from GitHub. I created a reusable function to hopefully make this easier in the future. This function takes an input zipped shapefile and outputs an `sf` object that can be stored as a variable.
+
+```{r results = "hide"}
+library(sf)
+library(tidyverse)
+
+# Store raw address of zip file on GitHub
+SFB.RiskRegions.z <- "https://github.com/WWU-IETC-R-Collab/ClipToProjectBoundary/raw/main/Data/SFB_RiskRegions_Prelim20Aug2020.zip"
+
+unzip_shape <- function(InputShapeZip){
+  dl.temp <- tempfile() # Create local temp file for zipped shapefile
+  dl.temp2 <- tempfile() # Create a second local temp file to store unzipped shapefile
+  download.file(InputShapeZip, dl.temp, quiet=T) # Downloads zip file from InputShape
+  unzip(zip = dl.temp, exdir = dl.temp2) # Unzips zip file
+  shapefile.out <-list.files(dl.temp2, pattern = ".shp$",full.names=TRUE) # stores file path of files with .shp ext in dl.temp2
+  sf::st_read(shapefile.out) # Reads shapefile as sf object
+}
+
+SFB.RiskRegions <- unzip_shape(SFB.RiskRegions.z)
+
+# Proof it actually works
+ggplot() +
+  geom_sf(data = SFB.RiskRegions)
+```
 
